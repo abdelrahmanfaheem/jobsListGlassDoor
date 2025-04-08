@@ -1,28 +1,56 @@
-package com.example.jobsList.DTO;
+package com.example.jobsList.Model.Entity;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import lombok.Data;
 
 @Data
-public class JobDTO {
-     private String id;
+@Document(collection = "jobs")
+public class JopList {
+
+    @Id
+    private String id;
+
     private String companyId;
     private String hrId;
 
     private String title;
     private String description;
     private String location;
-    private String employmentType;
+    private String employmentType; // Full-time, Part-time, etc.
 
     private int salaryMin;
     private int salaryMax;
     private String salaryCurrency;
 
-    private List<String> requirements;
+    private List<String> requirements; // Skills list
     private LocalDateTime postedAt;
-    private String status;
+    private String status; // Active, Closed
+
+    public JopList() {
+    }
+
+    public JopList(String id, String companyId, String hrId, String title, String description, String location,
+            String employmentType, int salaryMin, int salaryMax, String salaryCurrency, List<String> requirements,
+            LocalDateTime postedAt, String status) {
+        this.id = id;
+        this.companyId = companyId;
+        this.hrId = hrId;
+        this.title = title;
+        this.description = description;
+        this.location = location;
+        this.employmentType = employmentType;
+        this.salaryMin = salaryMin;
+        this.salaryMax = salaryMax;
+        this.salaryCurrency = salaryCurrency;
+        this.requirements = requirements;
+        this.postedAt = postedAt;
+        this.status = status;
+    }
 
     public String getId() {
         return id;

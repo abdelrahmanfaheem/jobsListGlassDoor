@@ -1,11 +1,9 @@
 package com.example.jobsList;
 
- 
- 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.example.jobsList.Model.JopList;
+import com.example.jobsList.Model.Entity.JopList;
 import com.example.jobsList.Reposatory.JobsRepository;
 
 import java.time.LocalDateTime;

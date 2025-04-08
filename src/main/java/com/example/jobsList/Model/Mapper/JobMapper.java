@@ -1,7 +1,7 @@
-package com.example.jobsList.Mapper;
+package com.example.jobsList.Model.Mapper;
 
-import com.example.jobsList.DTO.JobDTO;
-import com.example.jobsList.Model.JopList;
+import com.example.jobsList.Model.DTO.JobDTO;
+import com.example.jobsList.Model.Entity.JopList;
 
 public class JobMapper {
 

@@ -3,18 +3,21 @@ package com.example.jobsList.Service;
 import java.util.List;
 import java.util.Optional;
 
- import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
- import com.example.jobsList.Model.JopList;
+import com.example.jobsList.Model.Entity.JopList;
 import com.example.jobsList.Reposatory.JobsRepository;
-
 
 @Service
 public class JobService {
 
-    @Autowired
     private JobsRepository jobRepository;
+
+    @Autowired
+    public JobService(JobsRepository jobRepository) {
+        this.jobRepository = jobRepository;
+    }
 
     public List<JopList> getAllJobs() {
         return jobRepository.findAll();
@@ -37,8 +40,7 @@ public class JobService {
         jobRepository.deleteById(id);
     }
 
-
-    public List<JopList> getJopByStatus(String status){
+    public List<JopList> getJopByStatus(String status) {
         return jobRepository.findByStatus(status);
     }
 }
