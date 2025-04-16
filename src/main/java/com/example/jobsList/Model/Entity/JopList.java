@@ -13,7 +13,7 @@ import lombok.Data;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(collection = "jobs")
+@Document(collection = "jopList")
 public class JopList {
 
     @Id
