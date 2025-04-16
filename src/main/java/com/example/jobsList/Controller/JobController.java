@@ -40,7 +40,8 @@ public class JobController {
     @PostMapping("/addJob")
     public ResponseEntity<JobDTO> createJob(@RequestBody JobDTO jobDTO) {
         JopList job = JobMapper.toEntity(jobDTO);
-        job.setPostedAt(LocalDateTime.now());
+       job.setPostedAt(LocalDateTime.now());
+
         return ResponseEntity.ok(JobMapper.toDTO(service.createJob(job)));
     }
 
@@ -57,12 +58,7 @@ public class JobController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/Status/{status}")
-    public List<JobDTO> getJobStatust(@PathVariable("status") String status) {
-        List<JopList> jops = service.getJopByStatus(status);
-        return jops.stream().map(JobMapper::toDTO).collect(Collectors.toList());
-
-    }
+    
 
     // Get jobs by status
     @GetMapping("/status/{status}")
@@ -72,5 +68,71 @@ public class JobController {
                 .map(JobMapper::toDTO)
                 .collect(Collectors.toList());
     }
+   ;
+     // List<JopList> findBySalaryCurrency(String salaryCurrency);
+    
+    @GetMapping("/titles/{titles}")
+    public List<JopList>finbyTitles (@PathVariable("titles") String titles){
+         return service.findByTitle(titles);
+
+    }
+
+    @GetMapping("/locations/{location}")
+    public List<JopList>findByLocation ( @PathVariable("location") String location){
+
+        return service.findByLocation(location);
+
+    }
+
+    @GetMapping("/types/{types}")
+    public List<JopList> findByEmploymentType(@PathVariable ("types") String types){
+         return service.findByEmploymentType(types);
+    }
+
+    @GetMapping("/currency/{currency}")
+    public List<JopList> findBySalaryCurrency(@PathVariable("currency") String currency){
+   return service.findBySalaryCurrency(currency);
+    }
+
+    @GetMapping("/allLocations")
+    public List<String> findDistinctLocations(){
+        return service.findDistinctLocations();
+    }
+
+    @GetMapping("/allTitles")
+    public List<String> findDistinctTitles(){
+        return service.findDistinctTitles();
+    }
+
+    @GetMapping("/allEmplymentTypes")
+    public List<String>findDistinctEmploymentTypes(){
+        return service.findDistinctEmploymentTypes();
+    }
+
+    @GetMapping("/allCurrencies")
+    public List<String>findDistinctSalaryCurrencies(){
+        return service.findDistinctSalaryCurrencies();
+    }
+
+    @GetMapping("/allStatus")
+    public List<String> findDistinctStatuses(){
+        return service.findDistinctStatuses();
+    }
+    
+    @GetMapping("/filter")
+    public List<JopList> filterJobs(
+            @RequestParam(required = false) String location,
+            @RequestParam(required = false) String currency,
+            @RequestParam(required = false) String status,
+            @RequestParam(required = false) String type,
+            @RequestParam(required = false) String title
+    ) {
+        return service.findbyfilters(location, currency, status, type, title);
+    }
+
+
+
+
+
 
 }
